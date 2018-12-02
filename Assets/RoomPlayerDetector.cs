@@ -7,7 +7,7 @@ public class RoomPlayerDetector : MonoBehaviour
     [SerializeField]
     private float minDistanceForMainCam = 7;
     [SerializeField]
-    private float maxDIstanceForMainCam = 12;
+    private float maxDistanceForMainCam = 12;
 
     // [SerializeField]
     private LayerMask camera1StartingMask;
@@ -69,7 +69,7 @@ public class RoomPlayerDetector : MonoBehaviour
         {
             EnableMainCamera();
         }
-        else if(playersInRoom < 2 || distance > maxDIstanceForMainCam)
+        else if(playersInRoom < 2 || distance > maxDistanceForMainCam)
         {
             DisableMainCamera();
         }
@@ -86,7 +86,7 @@ public class RoomPlayerDetector : MonoBehaviour
         mainCam.depth = -1;
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
@@ -104,10 +104,28 @@ public class RoomPlayerDetector : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (other.name == "Player1")
+            {
+                gameObject.layer = LayerMask.NameToLayer("Player1");
+            }
+            else if (other.name == "Player2")
+            {
+                gameObject.layer = LayerMask.NameToLayer("Player2");
+            }
+            
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if(other.CompareTag("Player"))
         {
+            gameObject.layer = LayerMask.NameToLayer("Default");
+
             playersInRoom--;
             if(playersInRoom <= 0)
             {

@@ -310,5 +310,6 @@ Assets\_Scripts\SimpleFollowTarget.cs
 Assets\EnableRendererOnStart.cs
 Assets\FollowMultipleTargets.cs
 Assets\LayerMaskSwapper.cs
+Assets\PlayerAnimation.cs
 Assets\PlayerInventory.cs
 Assets\RoomPlayerDetector.cs
